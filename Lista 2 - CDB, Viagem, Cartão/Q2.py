@@ -36,3 +36,46 @@
 # 5) Detalhe o valor original que gerou a dívida, e em quanto ela ficou. Mostre em
 # quantos % a fatura cresceu nos dois cenários de pagamento.
 
+def pagamento_inteiro(valor, pagamento):
+    valor - pagamento == 0
+    return 0
+
+
+def pagamento_inferior(valor, pagamento):
+    valor_restante = valor - pagamento
+    return valor_restante
+
+
+# Usaremos Juros Simples para calcular o juro da fatura
+def juros_fatura(valor_restante, meses):
+    montante = valor_restante + (valor_restante * 12/100 * meses) + (valor_restante * 2/100 * meses) + (valor_restante * 1/100 * meses)
+    return montante
+
+
+def computar_fatura(montante, valor):
+    porcentagem = (montante * 100) / valor
+    crescimento = porcentagem - 100
+    return crescimento
+
+valor_fatura = float(input('Digite o valor da fatura: '))
+
+# Primeiro cenário, pagemento inteiro
+pago = float(input('Digite o pagamento da fatura(completo): '))
+
+completo = pagamento_inteiro(valor_fatura, pago)
+print(f'Fatura paga, total restante a pagar R${completo}')
+
+# Segundo cenário, pagamento inferior e juro
+pago_inferior = float(input('Digite o pagamento da fatura(inferior): '))
+
+inferior = pagamento_inferior(valor_fatura, pago_inferior)
+print(f'Valor pago inferior, resta a pagar R${inferior}')
+
+meses = int(input('Digite a quantidade de meses não pago: '))
+
+fatura_juros = juros_fatura(inferior, meses)
+crescimento = computar_fatura(fatura_juros,valor_fatura)
+print('\n---------------------------------------------------------------')
+
+print(f'Fatura atrasada com juros, valor R${fatura_juros} durante {meses} meses')
+print(f'O crescimento do valor inicial de R${valor_fatura} para R${fatura_juros} é de {crescimento}%')
